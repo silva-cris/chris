@@ -59,17 +59,11 @@ function LED1_Off(){
   }
 
   // called when a message arrives
- // function onMessageArrived(message) {
-   // mensaje=message.payloadString.split("= ");
-  //  document.getElementById("sensor").innerHTML=mensaje[1];
-  //  console.log("MensajeRecibido:"+message.payloadString);
-
- // }
-  
-    function LED1_On() {
+  function onMessageArrived(message) {
     mensaje=message.payloadString.split("= ");
     document.getElementById("sensor").innerHTML=mensaje[1];
-    innerHTML.log("MensajeRecibido:"+message.payloadString);
+    console.log("MensajeRecibido:"+message.payloadString);
+
   }
   
   

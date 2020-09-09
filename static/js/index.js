@@ -69,7 +69,7 @@ function LED1_Off(){
     function LED1_On() {
     mensaje=message.payloadString.split("= ");
     document.getElementById("sensor").innerHTML=mensaje[1];
-    console.log("MensajeRecibido:"+message.payloadString);
+    innerHTML.log("MensajeRecibido:"+message.payloadString);
   }
   
   

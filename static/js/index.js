@@ -59,12 +59,20 @@ function LED1_Off(){
   }
 
   // called when a message arrives
-  function onMessageArrived(message) {
+ // function onMessageArrived(message) {
+   // mensaje=message.payloadString.split("= ");
+  //  document.getElementById("sensor").innerHTML=mensaje[1];
+  //  console.log("MensajeRecibido:"+message.payloadString);
+
+ // }
+  
+    function LED1_On() {
     mensaje=message.payloadString.split("= ");
     document.getElementById("sensor").innerHTML=mensaje[1];
     console.log("MensajeRecibido:"+message.payloadString);
-
   }
+  
+  
 
   function sendMessage(Texto){
     message = new Paho.MQTT.Message(Texto);

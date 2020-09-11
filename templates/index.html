@@ -1,28 +1,63 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
-<script src="/static/js/index.js"></script>
 
-<title>EMBEBIDOS</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
+	<script src="/static/js/index.js"></script>
+	<link rel="stylesheet" href="/static/css/estilos.css">
+	<title>Riego Automatico</title>
+
 </head>
 <body>
-<h1>EXAMEN Embebidos</h1>
-<img src="/static/images/uno.png" alt="user" idth="300" height="300">
-<button id = 'LED1On'type="button" onclick="LED1_On();">SENSOR1 On </button>
-<button id = 'LED1Off' type="button" onclick="LED1_Off();">SENSOR1 Off</button>
-<button id = 'LED2On'type="button" onclick="LED1_On();">SENSOR2 On </button>
-<button id = 'LED2Off' type="button" onclick="LED1_Off();">SENSOR2 Off</button>
+	<div align="center">
+		<h1>UNIVERSIDAD NACIONAL DE CHIMBORAZO</h1>
+		<img src="/static/images/Log.png" alt="user" width="150" height="150">
+		<h2>Facultad de Ingenieria</h2>
+		<br><h1>Proyecto de Dispositivos Embebidos</h1></br>
+		<img src="/static/images/Pro.png" width="400" height="250">
+	</div>
+	<div align="center">
+	
+		<br><button id="Config" class="btn-abrir-popup" onclick="Mostrar()">Configuracion</button>
+		<button id="encender" class="btn-abrir-popup" onclick="Activar()">Encender</button></br>
+		<div class="overlay" id="overlay">
+		
+			<div class="popup" id="popup">
+				<a href="#" id="btn-cerrar-popup" class="btn-cerrar-popup" onclick="Cerrar()">X<i class="fas fa-times"></i></a>
+				<h3>Configuracion</h3>
+				<h4>Elija la hora para el regado automatico</h4>
 
+				<form name="formulario1">
+					<div class="contenedor-inputs">
+						<div class="text_izq">
+						</div>
+						<div class="text_izq">
+							<h5>Hora:</h5>
+						</div>
+						<input id="HoraS" type="time" name="date">
 
+					</div>
+					<input type="button" class="btn-abrir-popup" name="BotonDone" value="Aceptar"onclick="ObtenerDatos()">
+				</form>
+			</div>
+		</div>
+		<div>
+			<p>Nivel de Agua:</p> 
+			<meter id="meter5" min="0" max="100"
+         	low="25" high="75"
+			 optimum="100" value="0"></meter>
+			
+		</div>
+		<h2>Hora de Encendido:</h2>
+		<h2 id="fecha"></h2>
+		<br><p>Automatico &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Manual</p></br>
+		<img src="/static/images/reg.png" alt="user" width="140" height="200" id="ani">
+		<img src="/static/images/reg.png" alt="user" width="140" height="200" id="ani1">
 
-<h1>Sensor1:</h><h id="sensor"> Visualiza en consola</h1>
+	</div>
 
-<h1>Sensor2:</h><h id="sensor"> visualiza en consola</h1>
-
-
-
-
-
+	<script src="/static/js/popup.js"></script>
 </body>
 </html>
+
+

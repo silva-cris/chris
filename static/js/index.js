@@ -1,11 +1,27 @@
+//https://www.eclipse.org/paho/clients/js/
+
+function LED1_On() {
+    
+	console.log("Encendido");
+    alert("led on");
+    sendMessage("On");
+}
+function LED1_Off(){	
+	console.log("Apagado");
+    alert("led off");
+    sendMessage("Off");
+}
+
+
+
+
+
+
 // Create a client instance
-  //client = new Paho.MQTT.Client("postman.cloudmqtt.com", 14970);7
+  //client = new Paho.MQTT.Client("postman.cloudmqtt.com", 14970);
   
   client = new Paho.MQTT.Client("maqiatto.com", 8883, "web_" + parseInt(Math.random() * 100, 10));
-  
-  var info,activar,texHora,valor,Sactivar,HCom,Ntank;
-  
-  info=["","",""];
+
   // set callback handlers
   client.onConnectionLost = onConnectionLost;
   client.onMessageArrived = onMessageArrived;
@@ -23,10 +39,10 @@
   // called when the client connects
   function onConnect() {
     // Once a connection has been made, make a subscription and send a message.
-    console.log("Conectado...");
+    console.log("Conexion Establecida");
 	
     client.subscribe("crisfabri24@gmail.com/test");
-
+    sendMessage("hola desde mii web");
 	
   }
 
@@ -44,53 +60,17 @@
 
   // called when a message arrives
   function onMessageArrived(message) {
-    val=document.getElementById('meter5');
-    console.log(message.payloadString);
-    info=message.payloadString.split(",");
-    activar=parseInt(info[0]);
-    valor=parseInt(info[1]);
-    val.value=valor;
-    Activar();
+    mensaje=message.payloadString.split("= ");
+    document.getElementById("sensor").innerHTML=mensaje[1];
+    console.log("MensajeRecibido:"+message.payloadString);
+
   }
-
-  function ObtenerDatos(){
-	
-    var hora1=document.getElementById('HoraS').value;
-    
-	texHora=hora1;
-	if(texHora==""){
-		alert("Ingrese Todos los Parametros")
-	}else{
-		texDia.innerText=texHora;
-		Cerrar();
-	}
-
-		
-}
-
-function Activar(){
-    
-	if((texto.innerText=='Encender'|| activar==1)&&(valor!=0)){
-		texto.innerText=" Apagar ";
-        animacion.src="/static/images/reg1.gif";
-        message = new Paho.MQTT.Message("1,"+texHora);
-        message.destinationName = "jomsk@hotmail.com/test1";
-        client.send(message);
-    }
-    else
-	{
-		texto.innerText='Encender';
-        animacion.src="/static/images/reg.png"
-        message = new Paho.MQTT.Message("0,"+texHora);
-        message.destinationName = "crisfabri24@gmail.com/test1";
-        client.send(message);
-	}
-}
-function enviarH(){
-    message = new Paho.MQTT.Message("0,"+texHora);
-	message.destinationName = "crisfabri24@gmail.com/test1";
-	client.send(message);
-}
-
   
+  
+
+  function sendMessage(Texto){
+    message = new Paho.MQTT.Message(Texto);
+    message.destinationName = "crisfabri24@gmail.com/test1";
+    client.send(message);
+  }
   

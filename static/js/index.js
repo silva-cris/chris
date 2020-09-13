@@ -1,34 +1,18 @@
-//https://www.eclipse.org/paho/clients/js/
-
-/*function LED1_On() { 
-    
-	console.log("Encendido");
-    alert("led on");
-    sendMessage("On");
-}
-function LED1_Off(){	
-	console.log("Apagado");
-    alert("led off");
-    sendMessage("Off");
-}*/
-
-
-
-
-
-
 // Create a client instance
-  //client = new Paho.MQTT.Client("postman.cloudmqtt.com", 14970);
+  //client = new Paho.MQTT.Client("postman.cloudmqtt.com", 14970);7
   
   client = new Paho.MQTT.Client("maqiatto.com", 8883, "web_" + parseInt(Math.random() * 100, 10));
-
+  
+  var info,activar,texHora,valor,Sactivar,HCom,Ntank;
+  
+  info=["","",""];
   // set callback handlers
   client.onConnectionLost = onConnectionLost;
   client.onMessageArrived = onMessageArrived;
   var options = {
    useSSL: false,
     userName: "crisfabri24@gmail.com",
-    password: "123456789",
+    password: "123silva45leo",
     onSuccess:onConnect,
     onFailure:doFail
   }
@@ -39,12 +23,11 @@ function LED1_Off(){
   // called when the client connects
   function onConnect() {
     // Once a connection has been made, make a subscription and send a message.
-    console.log("Conexion Establecida");
+    console.log("Conectado...");
 	
     client.subscribe("crisfabri24@gmail.com/test");
-    message=new Paho.MQTT.Message("Hola A todos ");
-	message.destinationName= "crisfabri24@gmail.com/test1";
-	client.sent(message);
+
+	
   }
 
   function doFail(e){
@@ -61,18 +44,53 @@ function LED1_Off(){
 
   // called when a message arrives
   function onMessageArrived(message) {
+    val=document.getElementById('meter5');
     console.log(message.payloadString);
-	mensaje=message.payloadString.split("= ");
-    document.getElementById("sensor1").innerHTML=message.payloadString;
-    
-
+    info=message.payloadString.split(",");
+    activar=parseInt(info[0]); // valor activacion 
+    valor=parseInt(info[1]); // valor de la hora
+    val.value=valor;   // imprime la hora
+    Activar();
   }
-  
-  
 
- /* function sendMessage(Texto){
-    message = new Paho.MQTT.Message(Texto);
-    message.destinationName = "crisfabri24@gmail.com/test1";
-    client.send(message);
-  }*/
+  function ObtenerDatos(){
+	
+    var hora1=document.getElementById('HoraS').value;
+    
+	texHora=hora1;
+	if(texHora==""){
+		alert("Ingrese Todos los Parametros")
+	}else{
+		texDia.innerText=texHora;
+		Cerrar();
+	}
+
+		
+}
+
+function Activar(){
+    
+	if((texto.innerText=='Encender'|| activar==1)&&(valor!=0)){
+		texto.innerText=" Apagar ";
+        animacion.src="/static/images/reg1.gif";
+        message = new Paho.MQTT.Message("1,"+texHora);
+        message.destinationName = "jomsk@hotmail.com/test1";
+        client.send(message);
+    }
+    else
+	{
+		texto.innerText='Encender';
+        animacion.src="/static/images/reg.png"
+        message = new Paho.MQTT.Message("0,"+texHora);
+        message.destinationName = "crisfabri24@gmail.com/test1";
+        client.send(message);
+	}
+}
+function enviarH(){
+    message = new Paho.MQTT.Message("0,"+texHora);
+	message.destinationName = "crisfabri24@gmail.com/test1";
+	client.send(message);
+}
+
+  
   

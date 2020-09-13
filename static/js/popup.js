@@ -1,9 +1,9 @@
-var overlay = document.getElementById('overlay'),
-	popup = document.getElementById('popup'),
-	animacion1=document.getElementById('ani'),
-	texDia=document.getElementById('fecha'),
-	animacion=document.getElementById('ani1'),
-	texto=document.getElementById('encender');
+var overlay = document.getElementById('overlay'),// acceso a la capa 
+	popup = document.getElementById('popup'),  // variable de una clase
+	animacion1=document.getElementById('ani'),  // animaciones 
+	texDia=document.getElementById('fecha'),    // elemento de la hora
+	animacion=document.getElementById('ani1'),    // animaciones 
+	texto=document.getElementById('encender');   // boton encender
 	
 
 
@@ -11,7 +11,7 @@ var texHora,hoy,hora,boot,Min,Hor;
 texHora=null;
 
 function Mostrar(){
-	
+	// relacionado a boton configurar , abre elmenu poput
 	overlay.classList.add("active")
 	popup.classList.add("active")
 	
@@ -23,7 +23,7 @@ function Cerrar(){
 	enviarH();
 }
 
-function Tiempo(){
+function Tiempo(){ // calculamos la hora , la actualza 
 	
 	hoy=new Date();
 	if(hoy.getHours()<10){

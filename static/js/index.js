@@ -1,6 +1,6 @@
 //https://www.eclipse.org/paho/clients/js/
 
-function LED1_On() {
+/*function LED1_On() { 
     
 	console.log("Encendido");
     alert("led on");
@@ -10,7 +10,7 @@ function LED1_Off(){
 	console.log("Apagado");
     alert("led off");
     sendMessage("Off");
-}
+}*/
 
 
 
@@ -42,8 +42,9 @@ function LED1_Off(){
     console.log("Conexion Establecida");
 	
     client.subscribe("crisfabri24@gmail.com/test");
-    sendMessage("hola desde mii web");
-	
+    message=new Paho.MQTT.Message("Hola A todos ");
+	message.destinationName= "crisfabri24@gmail.com/test1";
+	client.sent(message);
   }
 
   function doFail(e){
@@ -60,17 +61,18 @@ function LED1_Off(){
 
   // called when a message arrives
   function onMessageArrived(message) {
-    mensaje=message.payloadString.split("= ");
-    document.getElementById("sensor").innerHTML=mensaje[1];
-    console.log("MensajeRecibido:"+message.payloadString);
+    console.log(message.payloadString);
+	mensaje=message.payloadString.split("= ");
+    document.getElementById("sensor1").innerHTML=message.payloadString;
+    
 
   }
   
   
 
-  function sendMessage(Texto){
+ /* function sendMessage(Texto){
     message = new Paho.MQTT.Message(Texto);
     message.destinationName = "crisfabri24@gmail.com/test1";
     client.send(message);
-  }
+  }*/
   
